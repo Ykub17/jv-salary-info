@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class SalaryInfo {
+    private static final DateTimeFormatter dateFormatter =
+            DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     public String getSalaryInfo(String[] names, String[] data, String dateFrom, String dateTo) {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         LocalDate from = LocalDate.parse(dateFrom, dateFormatter);
         LocalDate to = LocalDate.parse(dateTo, dateFormatter);
         int[] salaries = new int[names.length];
@@ -30,15 +32,16 @@ public class SalaryInfo {
         result.append(dateFrom);
         result.append(" - ");
         result.append(dateTo);
-        result.append("\n");
+        result.append(System.lineSeparator());
         for (int i = 0; i < names.length; i++) {
             result.append(names[i]);
             result.append(" - ");
             result.append(salaries[i]);
             if (i < names.length - 1) {
-                result.append("\n");
+                result.append(System.lineSeparator());
             }
         }
+
         return result.toString();
     }
 }
